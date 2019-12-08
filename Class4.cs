@@ -4,11 +4,11 @@ using System.Text;
 
 namespace ConsoleXiangqi
 {
-    class control
+    class control//这个类的作用我觉得是能把main类变得很简洁
     {
         public board Board = new board();
         string[,] Display = new string[9, 10];
-        string color = "black";
+        string color = "black";//这个是在后面玩家切换回合使用，显示黑色走
 
         public bool Gameover()
         {
@@ -24,7 +24,7 @@ namespace ConsoleXiangqi
             return alive;
         }
 
-        public void display()
+        public void display()//展示棋盘
         {
             for (int j = 0; j < 10; j++)
             {
@@ -87,7 +87,7 @@ namespace ConsoleXiangqi
             Console.WriteLine("");
         }
 
-        public void Playchoose()
+        public void Playchoose()//选择棋子
         {
             string receiveBegin;
             string receiveEnd;
@@ -100,7 +100,7 @@ namespace ConsoleXiangqi
             receiveBegin = Console.ReadLine();
             begin = receiveBegin.Split(',');
 
-            while (!inputcondition1)
+            while (!inputcondition1)//限定输入的坐标反馈错误给用户
             {
                 bool condition1 = false;
                 if (int.Parse(begin[0]) > 8 || int.Parse(begin[0]) < 0 || int.Parse(begin[1]) < 0 || int.Parse(begin[0]) > 9)//看看输入是不是范围以内的值
@@ -135,7 +135,7 @@ namespace ConsoleXiangqi
             receiveEnd = Console.ReadLine();
             end = receiveEnd.Split(',');
 
-            while (!inputcondition2)
+            while (!inputcondition2)//限定输入的坐标反馈错误给用户
             {
                 bool condition1 = false;
                 if (int.Parse(end[0]) > 8 || int.Parse(end[0]) < 0 || int.Parse(end[1]) < 0 || int.Parse(end[0]) > 9)//看看输入是不是范围以内的值
@@ -161,7 +161,7 @@ namespace ConsoleXiangqi
                 condition2 = true;
 
                 bool condition3 = false;
-                while (!(Board.Chess[int.Parse(begin[0]), int.Parse(begin[1])].JudgeMovement(int.Parse(end[0]), int.Parse(end[1]))))//看看棋子走对了没
+                if (!(Board.Movemethod(int.Parse(begin[0]), int.Parse(begin[1]), int.Parse(end[0]), int.Parse(end[1]))))//看看棋子走对了没
                 {
                     string NameofChessPlayerChoosed = Board.Chess[int.Parse(begin[0]), int.Parse(begin[1])].Getname();
                     string MoveMethod;
@@ -181,7 +181,7 @@ namespace ConsoleXiangqi
 
         }
 
-        public void DisplayChoose()
+        public void DisplayChoose()//可能后期用于提供可走路线的展示
         {
 
         }

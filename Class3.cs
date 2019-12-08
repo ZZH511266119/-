@@ -7,7 +7,7 @@ using System.Text;
 namespace ConsoleXiangqi
 {
 
-    public class MyException : Exception
+    public class MyException : Exception//这个class没有用，是我想学异常操作复制下来的
     {
         public MyException()
             : base("默认错误测试")
