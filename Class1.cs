@@ -9,9 +9,11 @@ namespace ConsoleXiangqi
     public abstract class chess
     {
         string name;//名字，颜色，行，列，这是我暂时想到有用的属性
-        string color;
-        int row;
-        int colum;
+        public string color;
+        public int row;
+        public int colum;
+        public bool Cango = true;
+        public bool alive = true;
 
         public chess(string color, string name, int colum, int row)//构造函数
         {
@@ -30,6 +32,20 @@ namespace ConsoleXiangqi
         {
             return this.color;
         }
+
+        public int[] Getaix()//获取棋子的坐标
+        {
+            int[] aix = new int[2];
+            aix[0] = this.colum;
+            aix[1] = this.row;
+            return aix;
+        }
+
+        public virtual bool JudgeMovement(int endcolum, int endrow)
+        { 
+            return this.Cango;
+        }
+
 
     }
 
@@ -61,14 +77,111 @@ namespace ConsoleXiangqi
             public soldier(string color, int colum, int row)
             : base(color, "s", colum, row)
             { }
+
+        public override bool JudgeMovement(int endcolum, int endrow)
+        {
+            switch (this.color)
+            {
+                case "red":
+                    if (row <= 5)//无过河
+                    {
+                        if (endcolum == colum && (row - endrow) == 1)
+                        {
+                            Cango = true;
+                        }
+                        else
+                        {
+                            Cango = false;
+                        }
+
+                    }
+
+                    else//已经过河
+                    {
+                        if(colum - endcolum == 1 || colum - endcolum == -1)//兵过河后走左右
+                        {
+                            if (endrow - row == 0)
+                            {
+                                Cango = true;
+                            }
+                            else
+                            {
+                                Cango = false;
+                            }
+                        }
+                        else if (row - endrow == 1 )
+                        {
+                            if(colum - endcolum == 0)
+                            {
+                                Cango = true;
+                            }
+                            else
+                            {
+                                Cango = false;
+                            }
+                        }
+                        else
+                        {
+                            Cango = false;
+                        }
+                    }
+                    break;
+
+                case "black":
+                    if (row <= 4)//无过河
+                    {
+                        if (endcolum == colum && (endrow - row) == 1)
+                        {
+                            Cango = true;
+                        }
+                        else
+                        {
+                            Cango = false;
+                        }
+
+                    }
+
+                    else//已经过河
+                    {
+                        if (colum - endcolum == 1 || colum - endcolum == -1)//兵过河后走左右
+                        {
+                            if (endrow - row == 0)
+                            {
+                                Cango = true;
+                            }
+                            else
+                            {
+                                Cango = false;
+                            }
+                        }
+                        else if (endrow - row == 1)
+                        {
+                            if (colum - endcolum == 0)
+                            {
+                                Cango = true;
+                            }
+                            else
+                            {
+                                Cango = false;
+                            }
+                        }
+                        else
+                        {
+                            Cango = false;
+                        }
+                    }
+                    break;
+            }
+            return base.JudgeMovement(endcolum, endrow);
         }
+    }
 
         public class elephant : chess
         {
             public elephant(string color, int colum, int row)
             : base(color, "e", colum, row)
             { }
-        }
+    }
 
         public class guard : chess
         {
@@ -79,7 +192,6 @@ namespace ConsoleXiangqi
 
         public class general : chess
         {
-        public bool alive = true;
         public general(string color, int colum, int row)
             : base(color, "G", colum, row)
         { }

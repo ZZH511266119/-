@@ -12,7 +12,14 @@ namespace ConsoleXiangqi
             game.display();//展示棋盘
             while (!game.Gameover())//先判断游戏有没有结束（将的生死），然后循环玩家选择，展示棋盘，黑红交换
             {
-                game.Playchoose();
+                try
+                {
+                    game.Playchoose();
+                }
+                catch(NullReferenceException ex){
+                    Console.WriteLine("There is no chess your input aix!");
+                }
+
                 game.display();
                 game.SwitchPlayer();
             }
