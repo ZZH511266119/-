@@ -104,7 +104,7 @@ namespace ConsoleXiangqi
             Chess[endcolum, endrow] = Chess[begincolum, beginrow];//把用户想去的点对应“棋盘”的二维数组坐标的棋子换成用户想走的棋子（即初始点的棋子放到终点）
             Chess[endcolum, endrow].row = endrow;
             Chess[endcolum, endrow].colum = endcolum;
-            Chess[begincolum, beginrow] = null;//然后把棋子一开始的点变为空
+            Chess[begincolum, beginrow] = new nochess(begincolum, beginrow);//然后把棋子一开始的点变为空
         }
 
         public bool Movemethod(int begincolum,int beginrow, int endcolum, int endrow)
@@ -112,7 +112,100 @@ namespace ConsoleXiangqi
             bool cango = true;
             switch (Chess[begincolum, beginrow].Getname())
             {
+                case "s":
+                    switch (Chess[begincolum,beginrow].color)
+                    {
+                        case "red":
+                            if (beginrow >= 5)//无过河
+                            {
+                                if (endcolum == begincolum && (beginrow - endrow) == 1)
+                                {
+                                    cango = true;
+                                }
+                                else
+                                {
+                                    cango = false;
+                                }
 
+                            }
+
+                            else//已经过河
+                            {
+                                if (begincolum - endcolum == 1 || begincolum - endcolum == -1)//兵过河后走左右
+                                {
+                                    if (endrow - beginrow == 0)
+                                    {
+                                        cango = true;
+                                    }
+                                    else
+                                    {
+                                        cango = false;
+                                    }
+                                }
+                                else if (beginrow - endrow == 1)
+                                {
+                                    if (begincolum - endcolum == 0)
+                                    {
+                                        cango = true;
+                                    }
+                                    else
+                                    {
+                                        cango = false;
+                                    }
+                                }
+                                else
+                                {
+                                    cango = false;
+                                }
+                            }
+                            break;
+
+                        case "black":
+                            if (beginrow <= 4)//无过河
+                            {
+                                if (endcolum == begincolum && (endrow - beginrow) == 1)
+                                {
+                                    cango = true;
+                                }
+                                else
+                                {
+                                    cango = false;
+                                }
+
+                            }
+
+                            else//已经过河
+                            {
+                                if (begincolum - endcolum == 1 || begincolum - endcolum == -1)//兵过河后走左右
+                                {
+                                    if (endrow - beginrow == 0)
+                                    {
+                                        cango = true;
+                                    }
+                                    else
+                                    {
+                                        cango = false;
+                                    }
+                                }
+                                else if (endrow - beginrow == 1)
+                                {
+                                    if (begincolum - endcolum == 0)
+                                    {
+                                        cango = true;
+                                    }
+                                    else
+                                    {
+                                        cango = false;
+                                    }
+                                }
+                                else
+                                {
+                                    cango = false;
+                                }
+                            }
+                            break;
+                    }
+                    break;
             }
             return cango;
         }
@@ -195,8 +288,139 @@ namespace ConsoleXiangqi
             Chess[6, 6] = redsoldier4;
 
             Chess[8, 6] = redsoldier5;
+
+            for (int j = 0; j < 10; j++)
+            {
+                for (int i = 0; i < 9; i++)
+                {
+                    if (Chess[i, j] == null)
+                    {
+                        Chess[i, j] = new nochess(i, j);
+                    }
+                }
+            }
         }
        
+        public void Wherecanchessgo(int colum, int row)
+        {
+            switch (Chess[colum, row].Getname())
+            {
+                case "s":
+                    switch(Chess[colum, row].Getcolor())
+                    {
+                        case "red":
+                            if (row >= 5)
+                            {
+                                Chess[colum,row - 1].changeCango();
+                            }
+                            else if (row<=4){
+                                if (colum == 0)
+                                {
+                                    if(row == 0)
+                                    {
+                                        Chess[colum + 1, row].changeCango();
+                                    }
+                                    else 
+                                    {
+                                        Chess[colum + 1, row].changeCango();
+                                        Chess[colum, row-1].changeCango();
+                                    }
+                                }
+                                else if (row==0)
+                                {
+                                    if (colum == 0)
+                                    {
+                                     Chess[colum + 1, row].changeCango();
+                                    }
+                                    else if(colum == 8)
+                                    {
+                                        Chess[colum - 1, row].changeCango();
+                                    }
+                                    else
+                                    {
+                                        Chess[colum + 1, row].changeCango();
+                                        Chess[colum - 1, row].changeCango();
+                                    }
+                                }
+                                else if(colum == 8){
+                                    if (row == 0)
+                                    {
+                                        Chess[colum - 1, row].changeCango();
+                                    }
+                                    else
+                                    {
+                                        Chess[colum - 1, row].changeCango();
+                                        Chess[colum, row - 1].changeCango();
+                                    }
+                                }
+                                else
+                                {
+                                    Chess[colum + 1, row].changeCango();
+                                    Chess[colum - 1, row].changeCango();
+                                    Chess[colum, row - 1].changeCango();
+                                }
+                            }
+                            break;
 
+                        case "black":
+                            if (row <= 4)
+                            {
+                                Chess[colum, row + 1].changeCango();
+                            }
+                            else if (row >= 5)
+                            {
+                                if (colum == 0)
+                                {
+                                    if (row == 9)
+                                    {
+                                        Chess[colum + 1, row].changeCango();
+                                    }
+                                    else
+                                    {
+                                        Chess[colum + 1, row].changeCango();
+                                        Chess[colum, row + 1].changeCango();
+                                    }
+                                }
+                                else if (row == 9)
+                                {
+                                    if (colum == 0)
+                                    {
+                                        Chess[colum + 1, row].changeCango();
+                                    }
+                                    else if (colum == 8)
+                                    {
+                                        Chess[colum - 1, row].changeCango();
+                                    }
+                                    else
+                                    {
+                                        Chess[colum + 1, row].changeCango();
+                                        Chess[colum - 1, row].changeCango();
+                                    }
+                                }
+                                else if (colum == 8)
+                                {
+                                    if (row == 0)
+                                    {
+                                        Chess[colum - 1, row].changeCango();
+                                    }
+                                    else
+                                    {
+                                        Chess[colum - 1, row].changeCango();
+                                        Chess[colum, row + 1].changeCango();
+                                    }
+                                }
+                                else
+                                {
+                                    Chess[colum + 1, row].changeCango();
+                                    Chess[colum - 1, row].changeCango();
+                                    Chess[colum, row + 1].changeCango();
+                                }
+                            }
+                            break;
+                    }
+
+                    break;
+            }
+        }
     }
 }

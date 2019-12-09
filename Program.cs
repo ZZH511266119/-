@@ -15,13 +15,30 @@ namespace ConsoleXiangqi
                 try
                 {
                     game.Playchoose();
+                    game.display();
+                    game.SwitchPlayer();
                 }
-                catch(NullReferenceException ex){
-                    Console.WriteLine("There is no chess your input aix!");
+                catch(FormatException ex)
+                {
+                    Console.WriteLine("");
+                    Console.WriteLine("Check your input is in the right rule, ex:1,2!");
+                    Console.WriteLine("Now restart you choose step'!");
+                    Console.WriteLine("");
                 }
-
-                game.display();
-                game.SwitchPlayer();
+                catch (IndexOutOfRangeException)
+                {
+                    Console.WriteLine("");
+                    Console.WriteLine("Check your input is in the right rule, ex:1,2 ");
+                    Console.WriteLine("Now restart you choose step'!");
+                    Console.WriteLine("");
+                }
+                catch (OverflowException)
+                {
+                    Console.WriteLine("");
+                    Console.WriteLine("Check your input is in the right rule, ex:1,2 ");
+                    Console.WriteLine("Now restart you choose step'!");
+                    Console.WriteLine("");
+                }
             }
 
             //游戏结束，有一方将死了，通过看黑将生死来判断谁赢

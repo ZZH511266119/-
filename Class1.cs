@@ -12,7 +12,7 @@ namespace ConsoleXiangqi
         public string color;
         public int row;
         public int colum;
-        public bool Cango = true;
+        public bool Cango = false;
         public bool alive = true;
 
         public chess(string color, string name, int colum, int row)//构造函数
@@ -41,11 +41,15 @@ namespace ConsoleXiangqi
             return aix;
         }
 
-        public virtual bool JudgeMovement(int endcolum, int endrow)
-        { 
-            return this.Cango;
+        public void changeCango()
+        {
+            Cango = true;
         }
 
+        public bool GetCango()
+        {
+            return Cango;
+        }
 
     }
 
@@ -77,103 +81,6 @@ namespace ConsoleXiangqi
             public soldier(string color, int colum, int row)
             : base(color, "s", colum, row)
             { }
-
-        public override bool JudgeMovement(int endcolum, int endrow)
-        {
-            switch (this.color)
-            {
-                case "red":
-                    if (row <= 5)//无过河
-                    {
-                        if (endcolum == colum && (row - endrow) == 1)
-                        {
-                            Cango = true;
-                        }
-                        else
-                        {
-                            Cango = false;
-                        }
-
-                    }
-
-                    else//已经过河
-                    {
-                        if(colum - endcolum == 1 || colum - endcolum == -1)//兵过河后走左右
-                        {
-                            if (endrow - row == 0)
-                            {
-                                Cango = true;
-                            }
-                            else
-                            {
-                                Cango = false;
-                            }
-                        }
-                        else if (row - endrow == 1 )
-                        {
-                            if(colum - endcolum == 0)
-                            {
-                                Cango = true;
-                            }
-                            else
-                            {
-                                Cango = false;
-                            }
-                        }
-                        else
-                        {
-                            Cango = false;
-                        }
-                    }
-                    break;
-
-                case "black":
-                    if (row <= 4)//无过河
-                    {
-                        if (endcolum == colum && (endrow - row) == 1)
-                        {
-                            Cango = true;
-                        }
-                        else
-                        {
-                            Cango = false;
-                        }
-
-                    }
-
-                    else//已经过河
-                    {
-                        if (colum - endcolum == 1 || colum - endcolum == -1)//兵过河后走左右
-                        {
-                            if (endrow - row == 0)
-                            {
-                                Cango = true;
-                            }
-                            else
-                            {
-                                Cango = false;
-                            }
-                        }
-                        else if (endrow - row == 1)
-                        {
-                            if (colum - endcolum == 0)
-                            {
-                                Cango = true;
-                            }
-                            else
-                            {
-                                Cango = false;
-                            }
-                        }
-                        else
-                        {
-                            Cango = false;
-                        }
-                    }
-                    break;
-            }
-            return base.JudgeMovement(endcolum, endrow);
-        }
     }
 
         public class elephant : chess
@@ -197,5 +104,11 @@ namespace ConsoleXiangqi
         { }
         }
 
+    public class nochess : chess
+    {
+        public nochess( int colum, int row)
+            : base("nochess", "nochess", colum, row)
+        { }
+    }
 
 }
