@@ -10,7 +10,7 @@ namespace ConsoleXiangqi
             control game = new control();
             game.Board.InitializeBorad();//初始化
             game.display();//展示棋盘
-            while (!game.Gameover())//先判断游戏有没有结束（将的生死），然后循环玩家选择，展示棋盘，黑红交换
+            while (game.Gameover())//先判断游戏有没有结束（将的生死），然后循环玩家选择，展示棋盘，黑红交换
             {
                 try
                 {

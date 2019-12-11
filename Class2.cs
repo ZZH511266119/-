@@ -545,6 +545,17 @@ namespace ConsoleXiangqi
 
                     }
                     break;
+
+                //-------------------------------------------------------------------------------------------------------------------------------------------
+                case "士":
+                    switch (Chess[begincolum, beginrow].Getcolor())
+                    {
+                        case "black":
+
+                            break;
+
+                    }
+                    break;
             }
             return cango;
         }
@@ -552,7 +563,12 @@ namespace ConsoleXiangqi
         //通过找黑红的将生死看游戏有没有结束
         public bool GeneralAlive()
         {
-            return blackgeneral.alive || redgeneral.alive;
+            return blackgeneral.alive && redgeneral.alive;
+        }
+
+        public bool blackGeneralAlive()
+        {
+            return blackgeneral.alive ;
         }
 
         //这是查找将的生死，之后用排除法得是黑赢还是红赢
@@ -1016,10 +1032,9 @@ namespace ConsoleXiangqi
 
                     }
 
-
-
                     break;
 
+                //-------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -1035,9 +1050,7 @@ namespace ConsoleXiangqi
 
 
 
-
-
-    }
+            }
         }
     }
 }
