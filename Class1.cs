@@ -58,7 +58,7 @@ namespace ConsoleXiangqi
         public class horse : chess
         {
             public horse(string color, int colum, int row)
-            : base(color, "h", colum, row)
+            : base(color, "马", colum, row)
             {
         }
         }
@@ -66,41 +66,41 @@ namespace ConsoleXiangqi
          public class cannon : chess
         {
             public cannon(string color, int colum, int row)
-            : base(color,"c", colum, row)
+            : base(color, "炮", colum, row)
             { }
         }
         public class rood : chess
         {
             public rood(string color, int colum, int row)
-            : base(color, "r", colum, row)
+            : base(color, "车", colum, row)
             { }
         }
 
         public class soldier : chess
         {
             public soldier(string color, int colum, int row)
-            : base(color, "s", colum, row)
+            : base(color, "兵", colum, row)
             { }
     }
 
         public class elephant : chess
         {
             public elephant(string color, int colum, int row)
-            : base(color, "e", colum, row)
+            : base(color, "象", colum, row)
             { }
     }
 
         public class guard : chess
         {
             public guard(string color, int colum, int row)
-            : base(color, "g", colum, row)
+            : base(color, "士", colum, row)
             { }
         }
 
         public class general : chess
         {
         public general(string color, int colum, int row)
-            : base(color, "G", colum, row)
+            : base(color, "将", colum, row)
         { }
         }
 

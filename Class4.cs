@@ -8,8 +8,8 @@ namespace ConsoleXiangqi
     {
         public board Board = new board();
         public board copyBoard = new board();
-        string[,] Display = new string[9, 10];
-        string[,] Display2 = new string[9, 10];
+        string[,] Display = new string[10, 11];
+        string[,] Display2 = new string[10, 11];
         string color = "black";//这个是在后面玩家切换回合使用，显示黑色走
 
         public bool Gameover()
@@ -28,22 +28,65 @@ namespace ConsoleXiangqi
 
         public void display()//展示棋盘
         {
-            for (int j = 0; j < 10; j++)
-            {
-                for (int i = 0; i < 9; i++)
+                Display[0, 0] = "  ";
+                Display[0, 1] = "零";
+                Display[0, 2] = "一";
+                Display[0, 3] = "二";
+                Display[0, 4] = "三";
+                Display[0, 5] = "四";
+                Display[0, 6] = "五";
+                Display[0, 7] = "六";
+                Display[0, 8] = "七";
+                Display[0, 9] = "八";
+                Display[0, 10] = "九";
+                Display[1, 0] = "零";
+                Display[2, 0] = "一";
+                Display[3, 0] = "二";
+                Display[4, 0] = "三";
+                Display[5, 0] = "四";
+                Display[6, 0] = "五";
+                Display[7, 0] = "六";
+                Display[8, 0] = "七";
+                Display[9, 0] = "八";
+
+                for (int j = 1; j < 10; j++)
                 {
-                    if (j == 4 || j == 5)
+
+                    Display[j, 1] = "┬ ";
+                    Display[j, 5] = "┴ ";
+                    Display[j, 6] = "┬ ";
+                    Display[j, 10] = "┴ ";
+                }
+                for (int i = 1; i < 11; i++)
                     {
-                        if (Board.Chess[i, j].Getname() == "nochess")
+                            Display[1, i] = "├ ";
+                            Display[9, i] = "┤ ";
+                    }
+
+                Display[1, 1] = "┌ ";
+                Display[9, 1] = "┐ ";
+                Display[1, 10] = "└ ";
+                Display[9, 10] = "┘ ";
+            for (int j = 0; j < 11; j++)
+                    {
+                        for (int i = 0; i < 10; i++)
+                        {
+                    if (i == 0 || j == 0)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.Write(Display[i, j]);
+                    }
+                    else if (Display[i, j] == "├ " || Display[i, j] == "┤ ")
+                    {
+                        if (Board.Chess[i - 1, j - 1].Getname() == "nochess")
                         {
                             Console.ForegroundColor = ConsoleColor.White;
-                            Display[i, j] = "-";
                             Console.Write(Display[i, j]);
                         }
                         else
                         {
-                            Display[i, j] = Board.GetChessName(i, j);
-                            switch (Board.GetChessColor(i, j))
+                            Display[i, j] = Board.GetChessName(i - 1, j - 1);
+                            switch (Board.GetChessColor(i - 1, j - 1))
                             {
                                 case "red":
                                     Console.ForegroundColor = ConsoleColor.Red;
@@ -54,20 +97,126 @@ namespace ConsoleXiangqi
                                     break;
                             }
                             Console.Write(Display[i, j]);
+                        }
+                    }
+                    else if (j == 1 || j == 10)
+                    {
+                        if(i != 4 && i != 5 && i != 6)
+                        {
+                            if (Board.Chess[i - 1, j - 1].Getname() == "nochess")
+                            {
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.Write(Display[i, j]);
+                            }
+                            else
+                            {
+                                Display[i, j] = Board.GetChessName(i - 1, j - 1);
+                                switch (Board.GetChessColor(i - 1, j - 1))
+                                {
+                                    case "red":
+                                        Console.ForegroundColor = ConsoleColor.Red;
+                                        break;
+
+                                    case "black":
+                                        Console.ForegroundColor = ConsoleColor.Blue;
+                                        break;
+                                }
+                                Console.Write(Display[i, j]);
+                            }
+                        }
+                        else
+                        {
+                            if (Board.Chess[i - 1, j - 1].Getname() == "nochess")
+                            {
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Display[i, j] = "×";
+                                Console.Write(Display[i, j]);
+                            }
+                            else
+                            {
+                                Display[i, j] = Board.GetChessName(i - 1, j - 1);
+                                switch (Board.GetChessColor(i - 1, j - 1))
+                                {
+                                    case "red":
+                                        Console.ForegroundColor = ConsoleColor.Red;
+                                        break;
+
+                                    case "black":
+                                        Console.ForegroundColor = ConsoleColor.Blue;
+                                        break;
+                                }
+                                Console.Write(Display[i, j]);
+                            }
+                        }
+                    }
+                    else if (j == 5 || j == 6)
+                    {
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.Write(Display[i, j]);
+                    }
+                    else if (i == 4 || i == 5 || i == 6)
+                    {
+                        if (j == 1 || j == 2 || j == 3 || j == 10 || j == 8 || j == 9)
+                        {
+                            if (Board.Chess[i - 1, j - 1].Getname() == "nochess")
+                            {
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Display[i, j] = "×";
+                                Console.Write(Display[i, j]);
+                            }
+                            else
+                            {
+                                Display[i, j] = Board.GetChessName(i - 1, j - 1);
+                                switch (Board.GetChessColor(i - 1, j - 1))
+                                {
+                                    case "red":
+                                        Console.ForegroundColor = ConsoleColor.Red;
+                                        break;
+
+                                    case "black":
+                                        Console.ForegroundColor = ConsoleColor.Blue;
+                                        break;
+                                }
+                                Console.Write(Display[i, j]);
+                            }
+                        }
+                        else
+                        {
+                            if (Board.Chess[i - 1, j - 1].Getname() == "nochess")
+                            {
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Display[i, j] = "＋";
+                                Console.Write(Display[i, j]);
+                            }
+                            else
+                            {
+                                Display[i, j] = Board.GetChessName(i - 1, j - 1);
+                                switch (Board.GetChessColor(i - 1, j - 1))
+                                {
+                                    case "red":
+                                        Console.ForegroundColor = ConsoleColor.Red;
+                                        break;
+
+                                    case "black":
+                                        Console.ForegroundColor = ConsoleColor.Blue;
+                                        break;
+                                }
+                                Console.Write(Display[i, j]);
+                            }
                         }
                     }
                     else
                     {
-                        if (Board.Chess[i, j].Getname() == "nochess")
+                        if (Board.Chess[i - 1, j - 1].Getname() == "nochess")
                         {
                             Console.ForegroundColor = ConsoleColor.White;
-                            Display[i, j] = "+";
+                            Display[i, j] = "┼ ";
                             Console.Write(Display[i, j]);
                         }
                         else
                         {
-                            Display[i, j] = Board.GetChessName(i, j);
-                            switch (Board.GetChessColor(i, j))
+                            Display[i, j] = Board.GetChessName(i - 1, j - 1);
+                            switch (Board.GetChessColor(i - 1, j - 1))
                             {
                                 case "red":
                                     Console.ForegroundColor = ConsoleColor.Red;
@@ -80,14 +229,12 @@ namespace ConsoleXiangqi
                             Console.Write(Display[i, j]);
                         }
                     }
-
-                }
-                Console.WriteLine("");
-            }
-
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("");
-        }
+                        }
+                        Console.WriteLine("");
+                    }
+                  Console.ForegroundColor = ConsoleColor.White;
+                  Console.WriteLine("");
+          }
 
         public void Playchoose()//选择棋子
         {
@@ -176,7 +323,7 @@ namespace ConsoleXiangqi
                 condition2 = true;
 
                 bool condition3 = false;
-                if ((Board.GetChessColor(int.Parse(end[0]), int.Parse(end[1])) == color) && (Board.Chess[int.Parse(end[0]), int.Parse(end[0])] == null))//看看是不是吃本方棋子
+                if ((Board.GetChessColor(int.Parse(end[0]), int.Parse(end[1])) == color))//看看是不是吃本方棋子
                 {
                     Console.WriteLine($"Oh! You are {color} player. You cannot eat your {color} chess!");
                     Console.WriteLine("");
@@ -213,31 +360,75 @@ namespace ConsoleXiangqi
         {
             CopyBoard();
             copyBoard.Wherecanchessgo(colum, row);
-            for (int j = 0; j < 10; j++)
+            Display[0, 0] = "  ";
+            Display[0, 1] = "零";
+            Display[0, 2] = "一";
+            Display[0, 3] = "二";
+            Display[0, 4] = "三";
+            Display[0, 5] = "四";
+            Display[0, 6] = "五";
+            Display[0, 7] = "六";
+            Display[0, 8] = "七";
+            Display[0, 9] = "八";
+            Display[0, 10] = "九";
+            Display[1, 0] = "零";
+            Display[2, 0] = "一";
+            Display[3, 0] = "二";
+            Display[4, 0] = "三";
+            Display[5, 0] = "四";
+            Display[6, 0] = "五";
+            Display[7, 0] = "六";
+            Display[8, 0] = "七";
+            Display[9, 0] = "八";
+
+            for (int j = 1; j < 10; j++)
             {
-                for (int i = 0; i < 9; i++)
+
+                Display[j, 1] = "┬ ";
+                Display[j, 5] = "┴ ";
+                Display[j, 6] = "┬ ";
+                Display[j, 10] = "┴ ";
+            }
+            for (int i = 1; i < 11; i++)
+            {
+                Display[1, i] = "├ ";
+                Display[9, i] = "┤ ";
+            }
+
+            Display[1, 1] = "┌ ";
+            Display[9, 1] = "┐ ";
+            Display[1, 10] = "└ ";
+            Display[9, 10] = "┘ ";
+            for (int j = 0; j < 11; j++)
+            {
+                for (int i = 0; i < 10; i++)
                 {
-                    if (j == 4 || j == 5)
+                    if (i == 0 || j == 0)
                     {
-                        if (copyBoard.Chess[i, j].Getname() == "nochess")
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.Write(Display[i, j]);
+                        Console.BackgroundColor = ConsoleColor.Black; 
+                    }
+                    else if (Display[i, j] == "├ " || Display[i, j] == "┤ ")
+                    {
+                        if (Board.Chess[i - 1, j - 1].Getname() == "nochess")
                         {
-                            if (copyBoard.Chess[i, j].Cango == true)
+                            if (copyBoard.Chess[i -1, j-1].Cango == true)
                             {
                                 Console.BackgroundColor = ConsoleColor.DarkYellow;
                             }
                             Console.ForegroundColor = ConsoleColor.White;
-                            Display2[i, j] = "-";
-                            Console.Write(Display2[i, j]);
-                            Console.BackgroundColor = ConsoleColor.Black ;
+                            Console.Write(Display[i, j]);
+                            Console.BackgroundColor = ConsoleColor.Black; 
                         }
                         else
                         {
-                            Display2[i, j] = copyBoard.GetChessName(i, j);
-                            if (copyBoard.Chess[i, j].Cango == true)
+                            Display[i, j] = Board.GetChessName(i - 1, j - 1);
+                            if (copyBoard.Chess[i - 1, j - 1].Cango == true)
                             {
                                 Console.BackgroundColor = ConsoleColor.DarkYellow;
                             }
-                            switch (copyBoard.GetChessColor(i, j))
+                            switch (Board.GetChessColor(i - 1, j - 1))
                             {
                                 case "red":
                                     Console.ForegroundColor = ConsoleColor.Red;
@@ -247,31 +438,182 @@ namespace ConsoleXiangqi
                                     Console.ForegroundColor = ConsoleColor.Blue;
                                     break;
                             }
-                            Console.Write(Display2[i, j]);
-                            Console.BackgroundColor = ConsoleColor.Black;
+                            Console.Write(Display[i, j]);
+                            Console.BackgroundColor = ConsoleColor.Black; 
+                        }
+                    }
+                    else if (j == 1 || j == 10)
+                    {
+                        if (i != 4 && i != 5 && i != 6)
+                        {
+                            if (Board.Chess[i - 1, j - 1].Getname() == "nochess")
+                            {
+                                if (copyBoard.Chess[i - 1, j - 1].Cango == true)
+                                {
+                                    Console.BackgroundColor = ConsoleColor.DarkYellow;
+                                }
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.Write(Display[i, j]);
+                                Console.BackgroundColor = ConsoleColor.Black;
+                            }
+                            else
+                            {
+                                if (copyBoard.Chess[i - 1, j - 1].Cango == true)
+                                {
+                                    Console.BackgroundColor = ConsoleColor.DarkYellow;
+                                }
+                                Display[i, j] = Board.GetChessName(i - 1, j - 1);
+                                switch (Board.GetChessColor(i - 1, j - 1))
+                                {
+                                    case "red":
+                                        Console.ForegroundColor = ConsoleColor.Red;
+                                        break;
+
+                                    case "black":
+                                        Console.ForegroundColor = ConsoleColor.Blue;
+                                        break;
+                                }
+                                Console.Write(Display[i, j]);
+                                Console.BackgroundColor = ConsoleColor.Black;
+                            }
+                        }
+                        else
+                        {
+                            if (Board.Chess[i - 1, j - 1].Getname() == "nochess")
+                            {
+                                if (copyBoard.Chess[i - 1, j - 1].Cango == true)
+                                {
+                                    Console.BackgroundColor = ConsoleColor.DarkYellow;
+                                }
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Display[i, j] = "×";
+                                Console.Write(Display[i, j]);
+                                Console.BackgroundColor = ConsoleColor.Black;
+                            }
+                            else
+                            {
+                                Display[i, j] = Board.GetChessName(i - 1, j - 1);
+                                if (copyBoard.Chess[i - 1, j - 1].Cango == true)
+                                {
+                                    Console.BackgroundColor = ConsoleColor.DarkYellow;
+                                }
+                                switch (Board.GetChessColor(i - 1, j - 1))
+                                {
+                                    case "red":
+                                        Console.ForegroundColor = ConsoleColor.Red;
+                                        break;
+
+                                    case "black":
+                                        Console.ForegroundColor = ConsoleColor.Blue;
+                                        break;
+                                }
+                                Console.Write(Display[i, j]);
+                                Console.BackgroundColor = ConsoleColor.Black;
+                            }
+                        }
+                    }
+                    else if (j == 5 || j == 6)
+                    {
+                        if (copyBoard.Chess[i - 1, j - 1].Cango == true)
+                        {
+                            Console.BackgroundColor = ConsoleColor.DarkYellow;
+                        }
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.Write(Display[i, j]);
+                        Console.BackgroundColor = ConsoleColor.Black;
+                    }
+                    else if (i == 4 || i == 5 || i == 6)
+                    {
+                        if (j == 1 || j == 2 || j == 3 || j == 10 || j == 8 || j == 9)
+                        {
+                            if (Board.Chess[i - 1, j - 1].Getname() == "nochess")
+                            {
+                                if (copyBoard.Chess[i - 1, j - 1].Cango == true)
+                                {
+                                    Console.BackgroundColor = ConsoleColor.DarkYellow;
+                                }
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Display[i, j] = "×";
+                                Console.Write(Display[i, j]);
+                                Console.BackgroundColor = ConsoleColor.Black;
+                            }
+                            else
+                            {
+                                Display[i, j] = Board.GetChessName(i - 1, j - 1);
+                                if (copyBoard.Chess[i - 1, j - 1].Cango == true)
+                                {
+                                    Console.BackgroundColor = ConsoleColor.DarkYellow;
+                                }
+                                switch (Board.GetChessColor(i - 1, j - 1))
+                                {
+                                    case "red":
+                                        Console.ForegroundColor = ConsoleColor.Red;
+                                        break;
+
+                                    case "black":
+                                        Console.ForegroundColor = ConsoleColor.Blue;
+                                        break;
+                                }
+                                Console.Write(Display[i, j]);
+                                Console.BackgroundColor = ConsoleColor.Black;
+                            }
+                        }
+                        else
+                        {
+                            if (Board.Chess[i - 1, j - 1].Getname() == "nochess")
+                            {
+                                if (copyBoard.Chess[i - 1, j - 1].Cango == true)
+                                {
+                                    Console.BackgroundColor = ConsoleColor.DarkYellow;
+                                }
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Display[i, j] = "＋";
+                                Console.Write(Display[i, j]);
+                                Console.BackgroundColor = ConsoleColor.Black;
+                            }
+                            else
+                            {
+                                Display[i, j] = Board.GetChessName(i - 1, j - 1);
+                                if (copyBoard.Chess[i - 1, j - 1].Cango == true)
+                                {
+                                    Console.BackgroundColor = ConsoleColor.DarkYellow;
+                                }
+                                switch (Board.GetChessColor(i - 1, j - 1))
+                                {
+                                    case "red":
+                                        Console.ForegroundColor = ConsoleColor.Red;
+                                        break;
+
+                                    case "black":
+                                        Console.ForegroundColor = ConsoleColor.Blue;
+                                        break;
+                                }
+                                Console.BackgroundColor = ConsoleColor.Black;
+                                Console.Write(Display[i, j]);
+                            }
                         }
                     }
                     else
                     {
-                        if (copyBoard.Chess[i, j].Getname() == "nochess")
+                        if (Board.Chess[i - 1, j - 1].Getname() == "nochess")
                         {
-                            if (copyBoard.Chess[i, j].Cango == true)
+                            if (copyBoard.Chess[i - 1, j - 1].Cango == true)
                             {
                                 Console.BackgroundColor = ConsoleColor.DarkYellow;
                             }
                             Console.ForegroundColor = ConsoleColor.White;
-                            Display2[i, j] = "+";
-                            Console.Write(Display2[i, j]);
+                            Display[i, j] = "┼ ";
+                            Console.Write(Display[i, j]);
                             Console.BackgroundColor = ConsoleColor.Black;
                         }
                         else
                         {
-                            Display2[i, j] = copyBoard.GetChessName(i, j);
-                            if (copyBoard.Chess[i, j].Cango == true)
+                            Display[i, j] = Board.GetChessName(i - 1, j - 1);
+                            if (copyBoard.Chess[i - 1, j - 1].Cango == true)
                             {
                                 Console.BackgroundColor = ConsoleColor.DarkYellow;
                             }
-                            switch (copyBoard.GetChessColor(i, j))
+                            switch (Board.GetChessColor(i - 1, j - 1))
                             {
                                 case "red":
                                     Console.ForegroundColor = ConsoleColor.Red;
@@ -281,19 +623,18 @@ namespace ConsoleXiangqi
                                     Console.ForegroundColor = ConsoleColor.Blue;
                                     break;
                             }
-                            Console.Write(Display2[i, j]);
                             Console.BackgroundColor = ConsoleColor.Black;
+                            Console.Write(Display[i, j]);
                         }
                     }
-
                 }
                 Console.WriteLine("");
             }
-
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("");
+
         }
-    
+
         public void SwitchPlayer()
         {
             switch (color)

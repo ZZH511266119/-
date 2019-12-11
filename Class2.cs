@@ -112,7 +112,7 @@ namespace ConsoleXiangqi
             bool cango = true;
             switch (Chess[begincolum, beginrow].Getname())
             {
-                case "s":
+                case "兵":
                     switch (Chess[begincolum,beginrow].color)
                     {
                         case "red":
@@ -204,6 +204,345 @@ namespace ConsoleXiangqi
                                 }
                             }
                             break;
+                    }
+                    break;
+
+                //--------------------------------------------------------------------------
+                case "炮":
+                    if ((beginrow == endrow) && (begincolum != endcolum))
+                    {
+                        if (endcolum < begincolum)
+                        {
+                            if (Chess[endcolum, endrow].Getname().Equals("nochess"))
+                            {
+                                for (int j = begincolum - 1; j > endcolum; j--)
+                                {
+                                    if (!Chess[j, endrow].Getname().Equals("nochess"))
+                                    {
+                                        cango = false;
+                                        break;
+                                    }
+                                    else
+                                        cango = true;
+                                }
+                            }
+                            //炮的“吃”法：
+                            //去的地方有棋子，且那个棋子颜色是与自己不同的，即敌方的棋子
+                            else if ((!Chess[endcolum, endrow].Getname().Equals("nochess")) && (!Chess[begincolum, beginrow].Getcolor().Equals(Chess[endcolum, endrow].Getcolor())))
+                            {
+                                //判断起点和目的地之间是否有棋子，且只有一个，才能吃目的地的棋子，否则吃不了
+                                int account = 0;
+                                for (int j = begincolum - 1; j > endcolum; j--)
+                                {
+                                    if (!Chess[j, endrow].Getname().Equals("nochess"))
+                                    {
+                                        account = account + 1;
+                                    }
+                                }
+                                if (account == 1)
+                                {
+                                    cango = true;
+                                }
+                                else
+                                    cango = false;
+                            }
+                            else
+                                cango = false;
+
+                        }
+                        else if (endcolum > begincolum)
+                        {
+                            if (Chess[endcolum, endrow].Getname().Equals("nochess"))
+                            {
+                                for (int j = endcolum - 1; j > begincolum; j--)
+                                {
+                                    if (!Chess[j, endrow].Getname().Equals("nochess"))
+                                    {
+                                        cango = false;
+                                        break;
+                                    }
+                                    else
+                                        cango = true;
+                                }
+                            }
+                            else if ((!Chess[endcolum, endrow].Getname().Equals("nochess")) && (!Chess[begincolum, beginrow].Getcolor().Equals(Chess[endcolum, endrow].Getcolor())))
+                            {
+                                int account = 0;
+                                for (int j = endcolum - 1; j > begincolum; j--)
+                                {
+                                    if (!Chess[j, endrow].Getname().Equals("nochess"))
+                                    {
+                                        account = account + 1;
+                                    }
+                                }
+                                if (account == 1)
+                                {
+                                    cango = true;
+                                }
+                                else
+                                    cango = false;
+                            }
+                            else
+                                cango = false;
+                        }
+
+                    }
+                    //上下移动
+                    else if ((begincolum == endcolum) && (beginrow != endrow))
+                    {
+                        if (endrow < beginrow)
+                        {
+                            if (Chess[endcolum, endrow].Getname().Equals("nochess"))
+                            {
+                                for (int i = beginrow - 1; i > endrow; i--)
+                                {
+                                    if (!Chess[endcolum, i].Getname().Equals("nochess"))
+                                    {
+                                        cango = false;
+                                        break;
+                                    }
+                                    else
+                                        cango = true;
+                                }
+                            }
+                            //炮的“吃”法：
+                            //去的地方有棋子，且那个棋子颜色是与自己不同的，即敌方的棋子
+                            else if ((!Chess[endcolum, endrow].Getname().Equals("nochess")) && (!Chess[begincolum, beginrow].Getcolor().Equals(Chess[endcolum, endrow].Getcolor())))
+                            {
+                                //判断起点和目的地之间是否有棋子，且只有一个，才能吃目的地的棋子，否则吃不了
+                                int account = 0;
+                                for (int i = beginrow - 1; i > endrow; i--)
+                                {
+                                    if (!Chess[endcolum, i].Getname().Equals("nochess"))
+                                    {
+                                        account = account + 1;
+                                    }
+                                }
+                                if (account == 1)
+                                {
+                                    cango = true;
+                                }
+                                else
+                                    cango = false;
+                            }
+                            else
+                                cango = false;
+
+                        }
+
+                        else if (endrow > beginrow)
+                        {
+                            if (Chess[endcolum, endrow].Getname().Equals("nochess"))
+                            {
+                                for (int i = endrow - 1; i > beginrow; i--)
+                                {
+                                    if (!Chess[endrow, i].Getname().Equals("nochess"))
+                                    {
+                                        cango = false;
+                                        break;
+                                    }
+                                    else
+                                        cango = true;
+                                }
+                            }
+                            else if ((!Chess[endcolum, endrow].Getname().Equals("nochess")) && (!Chess[begincolum, beginrow].Getcolor().Equals(Chess[endcolum, endrow].Getcolor())))
+                            {
+                                int account = 0;
+                                for (int i = endrow - 1; i > beginrow; i--)
+                                {
+                                    if (!Chess[endcolum, i].Getname().Equals("nochess"))
+                                    {
+                                        account = account + 1;
+                                    }
+                                }
+                                if (account == 1)
+                                {
+                                    cango = true;
+                                }
+                                else
+                                    cango = false;
+                            }
+                            else
+                                cango = false;
+                        }
+                        else
+                            cango = false;
+                    }
+                    else
+                        cango = false;
+
+                    break;
+                //--------------------------------------------------------------------------
+                case "象":
+                    switch (Chess[begincolum, beginrow].color)
+                    {
+                        case "black":
+                            if (beginrow <= 4)
+                            {
+                                if ((begincolum == 2) && (beginrow == 0))
+                                {
+                                    if ((endcolum - begincolum == 2) && (endrow - beginrow == 2))
+                                    {
+                                        if (Chess[begincolum + 1, beginrow + 1].Getname() == "nochess")
+                                        {
+                                            cango = true;
+                                        }
+
+                                        else
+                                        {
+                                            cango = false;
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        cango = false;
+                                    }
+
+
+                                }
+
+                                else if ((begincolum == 4) && (beginrow == 2))
+                                {
+                                    if (((endcolum - begincolum == 2) && (endrow - beginrow == 2)) || ((endrow - beginrow == 2) && (begincolum - endcolum == 2)))
+                                    {
+                                        if ((Chess[begincolum + 1, beginrow + 1].Getname() == "nochess") || (Chess[begincolum - 1, beginrow + 1].Getname() == "nochess"))
+                                        {
+                                            cango = true;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        cango = false;
+                                    }
+                                }
+
+                                else if ((begincolum == 6) && (beginrow == 0))
+                                {
+                                    if ((endcolum - begincolum == 2) && (endrow - beginrow == 2))
+                                    {
+                                        if (Chess[begincolum + 1, beginrow + 1].Getname() == "nochess")
+                                        {
+                                            cango = true;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        cango = false;
+                                    }
+                                }
+
+                                else if ((beginrow == 2) && (begincolum == 8))
+                                {
+                                    if ((begincolum - endcolum == 2) && (endrow - beginrow == 2))
+                                    {
+                                        if (Chess[begincolum - 1, beginrow + 1].Getname() == "nochess")
+                                        {
+                                            cango = true;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        cango = false;
+                                    }
+
+                                }
+
+
+                            }
+
+
+                            break;
+
+
+                        case "red":
+                            if (beginrow >= 5)
+                            {
+                                if ((beginrow == 9) && (begincolum == 2))
+                                {
+                                    if (((beginrow - endrow == 2) && (begincolum - endcolum == 2)) || ((beginrow - endrow == 2) && (endcolum - begincolum == 2)))
+                                    {
+                                        if ((Chess[begincolum - 1, beginrow - 1].Getname() == "nochess") || (Chess[begincolum + 1, beginrow - 1].Getname() == "nochess"))
+                                        {
+                                            cango = true;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        cango = false;
+                                    }
+                                }
+                                if ((begincolum == 0) && (beginrow == 7))
+                                {
+                                    if ((endcolum - begincolum == 2) && (beginrow - endrow == 2))
+                                    {
+                                        if (Chess[begincolum + 1, beginrow - 1].Getname() == "nochess")
+                                        {
+                                            cango = true;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        cango = false;
+                                    }
+                                }
+                                if ((beginrow == 9) && (begincolum == 6))
+                                {
+                                    if (((beginrow - endrow == 2) && (begincolum - endcolum == 2)) || ((beginrow - endrow == 2) && (endcolum - begincolum == 2)))
+                                    {
+                                        if ((Chess[begincolum - 1, beginrow - 1].Getname() == "nochess") || (Chess[begincolum + 1, beginrow - 1].Getname() == "nochess"))
+                                        {
+                                            cango = true;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        cango = false;
+                                    }
+                                }
+                                if ((begincolum == 4) && (beginrow == 7))
+                                {
+                                    if (((beginrow - endrow == 2) && (begincolum - endcolum == 2)) || ((beginrow - endrow == 2) && (endcolum - begincolum == 2)))
+                                    {
+                                        if ((Chess[begincolum - 1, beginrow - 1].Getname() == "nochess") || (Chess[begincolum + 1, beginrow - 1].Getname() == "nochess"))
+                                        {
+                                            cango = true;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        cango = false;
+                                    }
+
+                                }
+
+                                if ((beginrow == 7) && (begincolum == 8))
+                                {
+                                    if ((begincolum - endcolum == 2) && (beginrow - endrow == 2))
+                                    {
+                                        if (Chess[begincolum - 1, beginrow - 1].Getname() == "nochess")
+                                        {
+                                            cango = true;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        cango = false;
+                                    }
+
+                                }
+
+
+                            }
+
+
+
+
+                            break;
+
+
+
+
                     }
                     break;
             }
@@ -305,36 +644,54 @@ namespace ConsoleXiangqi
         {
             switch (Chess[colum, row].Getname())
             {
-                case "s":
+                case "兵":
                     switch(Chess[colum, row].Getcolor())
                     {
                         case "red":
                             if (row >= 5)
                             {
-                                Chess[colum,row - 1].changeCango();
+                                if (Chess[colum, row - 1].Getcolor() != "red")
+                                {
+                                    Chess[colum, row - 1].changeCango();
+                                }
                             }
                             else if (row<=4){
                                 if (colum == 0)
                                 {
                                     if(row == 0)
                                     {
-                                        Chess[colum + 1, row].changeCango();
+                                        if (Chess[colum + 1, row ].Getcolor() != "red")
+                                        {
+                                            Chess[colum + 1, row].changeCango();
+                                        }
                                     }
                                     else 
                                     {
-                                        Chess[colum + 1, row].changeCango();
-                                        Chess[colum, row-1].changeCango();
+                                        if (Chess[colum + 1, row].Getcolor() != "red")
+                                        {
+                                            Chess[colum + 1, row].changeCango();
+                                        }
+                                        if (Chess[colum , row - 1].Getcolor() != "red")
+                                        {
+                                            Chess[colum, row - 1].changeCango();
+                                        }
                                     }
                                 }
                                 else if (row==0)
                                 {
                                     if (colum == 0)
                                     {
-                                     Chess[colum + 1, row].changeCango();
+                                        if (Chess[colum + 1, row].Getcolor() != "red")
+                                        {
+                                            Chess[colum + 1, row].changeCango();
+                                        }
                                     }
                                     else if(colum == 8)
                                     {
-                                        Chess[colum - 1, row].changeCango();
+                                        if (Chess[colum - 1, row].Getcolor() != "red")
+                                        {
+                                            Chess[colum - 1, row].changeCango();
+                                        }
                                     }
                                     else
                                     {
@@ -345,19 +702,37 @@ namespace ConsoleXiangqi
                                 else if(colum == 8){
                                     if (row == 0)
                                     {
-                                        Chess[colum - 1, row].changeCango();
+                                        if (Chess[colum - 1, row].Getcolor() != "red")
+                                        {
+                                            Chess[colum - 1, row].changeCango();
+                                        }
                                     }
                                     else
                                     {
-                                        Chess[colum - 1, row].changeCango();
-                                        Chess[colum, row - 1].changeCango();
+                                        if (Chess[colum - 1, row].Getcolor() != "red")
+                                        {
+                                            Chess[colum - 1, row].changeCango();
+                                        }
+                                        if (Chess[colum, row - 1].Getcolor() != "red")
+                                        {
+                                            Chess[colum, row - 1].changeCango();
+                                        }
                                     }
                                 }
                                 else
                                 {
-                                    Chess[colum + 1, row].changeCango();
-                                    Chess[colum - 1, row].changeCango();
-                                    Chess[colum, row - 1].changeCango();
+                                    if(Chess[colum + 1,row].Getcolor() != "red")
+                                    {
+                                        Chess[colum + 1, row].changeCango();
+                                    }
+                                    if (Chess[colum - 1, row].Getcolor() != "red")
+                                    {
+                                        Chess[colum - 1, row].changeCango();
+                                    }
+                                    if (Chess[colum  , row-1].Getcolor() != "red")
+                                    {
+                                        Chess[colum , row-1].changeCango();
+                                    }
                                 }
                             }
                             break;
@@ -373,12 +748,21 @@ namespace ConsoleXiangqi
                                 {
                                     if (row == 9)
                                     {
-                                        Chess[colum + 1, row].changeCango();
+                                        if (Chess[colum + 1, row].Getcolor() != "black")
+                                        {
+                                            Chess[colum + 1, row].changeCango();
+                                        }
                                     }
                                     else
                                     {
-                                        Chess[colum + 1, row].changeCango();
-                                        Chess[colum, row + 1].changeCango();
+                                        if (Chess[colum + 1, row].Getcolor() != "black")
+                                        {
+                                            Chess[colum + 1, row].changeCango();
+                                        }
+                                        if (Chess[colum , row+1].Getcolor() != "black")
+                                        {
+                                            Chess[colum , row+1].changeCango();
+                                        }
                                     }
                                 }
                                 else if (row == 9)
@@ -401,26 +785,259 @@ namespace ConsoleXiangqi
                                 {
                                     if (row == 0)
                                     {
-                                        Chess[colum - 1, row].changeCango();
+
+                                        if (Chess[colum - 1, row].Getcolor() != "black")
+                                        {
+                                            Chess[colum - 1, row].changeCango();
+                                        }
                                     }
                                     else
                                     {
-                                        Chess[colum - 1, row].changeCango();
-                                        Chess[colum, row + 1].changeCango();
+                                        if (Chess[colum - 1, row].Getcolor() != "black")
+                                        {
+                                            Chess[colum - 1, row].changeCango();
+                                        }
+                                        if (Chess[colum, row + 1].Getcolor() != "black")
+                                        {
+                                            Chess[colum, row + 1].changeCango();
+                                        }
                                     }
                                 }
                                 else
                                 {
-                                    Chess[colum + 1, row].changeCango();
-                                    Chess[colum - 1, row].changeCango();
-                                    Chess[colum, row + 1].changeCango();
+                                    if (Chess[colum + 1, row].Getcolor() != "black")
+                                    {
+                                        Chess[colum + 1, row].changeCango();
+                                    }
+                                    if (Chess[colum - 1, row].Getcolor() != "black")
+                                    {
+                                        Chess[colum - 1, row].changeCango();
+                                    }
+                                    if (Chess[colum, row + 1].Getcolor() != "black")
+                                    {
+                                        Chess[colum, row + 1].changeCango();
+                                    }
                                 }
                             }
                             break;
                     }
+                    break;
+                //--------------------------------------------------------------------------------------------
+                case "炮":
+
+                    for (int i = row - 1; i >= 0; i--)
+                    {
+                        if (Chess[colum, i].Getname().Equals("nochess"))
+                        {
+                            Chess[colum, i].changeCango();
+                        }
+                        else
+                        {
+                            for (int i1 = i - 1; i1 >= 0; i1--)
+                            {
+                                if ((!Chess[colum, i1].Getname().Equals("nochess")) && (!Chess[colum, i1].Getcolor().Equals(Chess[colum, row].Getcolor())))
+                                {
+                                    Chess[colum, i1].changeCango();
+                                    i = -1;
+                                    break;
+
+                                }
+                                else
+                                {
+                                    i = -1;
+                                }
+                            }
+                        }
+                    }
+                    for (int i = row + 1; i <= 9; i++)
+                    {
+                        if (Chess[colum, i].Getname().Equals("nochess"))
+                        {
+                            Chess[colum, i].changeCango();
+                        }
+                        else
+                        {
+                            for (int i1 = i + 1; i1 <= 9; i1++)
+                            {
+                                if ((!Chess[colum, i1].Getname().Equals("nochess")) && (!Chess[colum, i1].Getcolor().Equals(Chess[colum, row].Getcolor())))
+                                {
+                                    Chess[colum, i1].changeCango();
+
+                                    i = 10;
+                                    break;
+                                }
+                                else
+                                {
+                                    i = 10;
+                                }
+                            }
+                        }
+                    }
+                    for (int j = colum - 1; j >= 0; j--)
+                    {
+                        if (Chess[j, row].Getname().Equals("nochess"))
+                        {
+                            Chess[j, row].changeCango();
+                        }
+                        else
+                        {
+                            for (int j1 = j - 1; j1 >= 0; j1--)
+                            {
+                                if ((!Chess[j1, row].Getname().Equals("nochess")) && (!Chess[j1, row].Getcolor().Equals(Chess[colum, row].Getcolor())))
+                                {
+                                    Chess[j1, row].changeCango();
+                                    j = -1;
+                                    break;
+                                }
+                                else
+                                {
+                                    j = -1;
+                                }
+                            }
+                        }
+                    }
+                    for (int j = colum + 1; j <= 8; j++)
+                    {
+                        if (Chess[j, row].Getname().Equals("nochess"))
+                        {
+                            Chess[j, row].changeCango();
+                        }
+                        else
+                        {
+                            for (int j1 = j + 1; j1 <= 8; j1++)
+                            {
+                                if ((!Chess[j1, row].Getname().Equals("nochess")) && (!Chess[j1, row].Getcolor().Equals(Chess[colum, row].Getcolor())))
+                                {
+                                    Chess[j1, row].changeCango();
+                                    j = 9;
+                                    break;
+                                }
+                                else
+                                {
+                                    j = 9;
+                                }
+                            }
+                        }
+                    }
+                    break;
+                //-------------------------------------------------------------------------------------------------------------------------------------------
+                case "象":
+                    switch (Chess[colum, row].Getcolor())
+                    {
+                        case "black":
+                            if (row <= 4)
+                            {
+                                if (row == 0)
+                                {
+                                    if ((Chess[colum - 1, row + 1].Getname() == "nochess") && (Chess[colum + 1, row + 1].Getname() == "nochess"))
+                                    {
+                                        Chess[colum - 2, row + 2].changeCango();
+                                        Chess[colum + 2, row + 2].changeCango();
+                                    }
+
+                                }
+                                if ((row == 2) && (colum == 0) && (Chess[colum + 1, row + 1].Getname() == "nochess"))
+                                {
+                                    Chess[colum + 2, row + 2].changeCango();
+
+                                }
+                                if ((row == 2) && (colum == 4) && (Chess[colum - 1, row + 1].Getname() == "nochess") && (Chess[colum + 1, row + 1].Getname() == "nochess"))
+                                {
+                                    Chess[colum + 2, row + 2].changeCango();
+                                    Chess[colum - 2, row + 2].changeCango();
+                                }
+                                if ((row == 2) && (colum == 8) && Chess[colum - 1, row + 1].Getname() == "nochess")
+                                {
+                                    Chess[colum - 2, row + 2].changeCango();
+                                }
+
+
+
+                            }
+
+
+
+
+
+
+
+
+                            break;
+
+                        case "red":
+                            if (row >= 5)
+                            {
+
+                                if (row == 9)
+                                {
+                                    if ((Chess[colum + 1, row - 1].Getname() == "nochess") && (Chess[colum - 1, row - 1].Getname() == "nochess"))
+                                    {
+                                        Chess[colum + 2, row - 2].changeCango();
+                                        Chess[colum - 2, row - 2].changeCango();
+                                    }
+                                }
+
+                                if (row == 7)
+                                {
+
+                                    if ((colum == 0) && (Chess[colum + 1, row - 1].Getname() == "nochess"))
+                                    {
+                                        Chess[colum + 2, row - 2].changeCango();
+                                    }
+
+
+
+
+                                    if ((colum == 4) && (Chess[colum + 1, row - 1].Getname() == "nochess") && (Chess[colum - 1, row - 1].Getname() == "nochess"))
+                                    {
+                                        Chess[colum + 2, row - 2].changeCango();
+                                        Chess[colum - 2, row - 2].changeCango();
+                                    }
+                                    if ((colum == 8) && (Chess[colum - 1, row - 1].Getname() == "nochess"))
+                                    {
+                                        Chess[colum - 2, row - 2].changeCango();
+                                    }
+                                }
+
+
+
+
+                            }
+
+
+
+
+
+                            break;
+
+
+
+
+
+                    }
+
+
 
                     break;
-            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
         }
     }
 }
