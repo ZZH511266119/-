@@ -28,7 +28,7 @@ namespace ConsoleXiangqi
                 catch (IndexOutOfRangeException)
                 {
                     Console.WriteLine("");
-                    Console.WriteLine("Check your input is in the right rule, ex:1,2 ");
+                    Console.WriteLine("Check your input is in the right rule, ex:1,2 3");
                     Console.WriteLine("Now restart you choose step'!");
                     Console.WriteLine("");
                 }

@@ -10,7 +10,7 @@ namespace ConsoleXiangqi
         public board copyBoard = new board();
         string[,] Display = new string[10, 11];
         string[,] Display2 = new string[10, 11];
-        string color = "black";//这个是在后面玩家切换回合使用，显示黑色走
+        string color = "red";//这个是在后面玩家切换回合使用，显示黑色走
 
         public bool Gameover()
         {
