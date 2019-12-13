@@ -345,9 +345,9 @@ namespace ConsoleXiangqi
                 {
                     Console.WriteLine($"Oh! You are {color} player. You cannot eat your {color} chess!");
                     Console.WriteLine("");
-                    Console.WriteLine("Which pieces do you want to move? Please input its aix(Ex: 1,2): ");
-                    receiveBegin = Console.ReadLine();
-                    begin = receiveBegin.Split(',');
+                    Console.WriteLine("Where do you wan to go? Please input its aix(Ex: 1,2): ");
+                    receiveEnd = Console.ReadLine();
+                    end = receiveEnd.Split(',');
                     condition2 = false;
                 }
                 condition3 = true;
@@ -632,8 +632,9 @@ namespace ConsoleXiangqi
                                         Console.ForegroundColor = ConsoleColor.Blue;
                                         break;
                                 }
-                                Console.BackgroundColor = ConsoleColor.Black;
                                 Console.Write(Display[i, j]);
+                                Console.BackgroundColor = ConsoleColor.Black;
+
                             }
                         }
                     }
@@ -667,8 +668,8 @@ namespace ConsoleXiangqi
                                     Console.ForegroundColor = ConsoleColor.Blue;
                                     break;
                             }
-                            Console.BackgroundColor = ConsoleColor.Black;
                             Console.Write(Display[i, j]);
+                            Console.BackgroundColor = ConsoleColor.Black;
                         }
                     }
                 }
