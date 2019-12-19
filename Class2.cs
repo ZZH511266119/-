@@ -658,40 +658,75 @@ namespace ConsoleXiangqi
                     switch (Chess[begincolum, beginrow].color)
                     {
                         case "red":
-                            if (Math.Abs(begincolum - endcolum) == 2 && Math.Abs(beginrow - endrow) == 1)
+
                             {
-                                if (Chess[endrow, beginrow].Getname() == "nochess")
-                                { cango = true; }
-                                else { cango = false; }
+                                if (Math.Abs(endrow - beginrow) + Math.Abs(endcolum - begincolum) == 3)
+                                {
+                                    if (Math.Abs(endrow - beginrow) == 2 && Math.Abs(endcolum - begincolum) == 1)
+                                    {
+                                        if (Chess[endcolum, (beginrow + endrow) / 2].Getname() == "nochess" ||
+                                            Chess[endcolum, (beginrow + endrow) / 2].Getcolor() == "black")
+                                        {
+                                            cango = true;
+
+                                        }
+                                        else
+                                        { cango = false; }
+                                    }
+                                    if (Math.Abs(endrow - beginrow) == 1 && Math.Abs(endcolum - begincolum) == 2)
+                                    {
+                                        if (Chess[begincolum - endcolum / 2, endrow].Getname() == "nochess" ||
+
+                                            Chess[begincolum - endcolum / 2, endrow].Getcolor() == "black")
+                                        {
+
+                                            cango = true;
+
+                                        }
+                                        else
+                                        { cango = false; }
+                                    }
+                                }
+                                else
+                                { cango = false; }
                             }
 
-                            else if (Math.Abs(begincolum - endcolum) == 1 && Math.Abs(beginrow - endrow) == 2)
-                            {
-                                if (Chess[begincolum, (beginrow + endrow) / 2].Getname() == "nochess")
-                                { cango = true; }
-                                else { cango = false; }
-                            }
-                            else cango = false;
+
                             break;
-
                         case "black":
-                            if (Math.Abs(begincolum - endcolum) == 2 && Math.Abs(beginrow - endrow) == 1)
-                            {
-                                if (Chess[endrow, beginrow].Getname() == "nochess")
 
-                                { cango = true; }
-                                else { cango = false; }
+                            {
+                                if (Math.Abs(endrow - beginrow) + Math.Abs(endcolum - begincolum) == 3)
+                                {
+                                    if (Math.Abs(endrow - beginrow) == 2 && Math.Abs(endcolum - begincolum) == 1)
+                                    {
+                                        if (Chess[endcolum, (beginrow + endrow) / 2].Getname() == "nochess" ||
+                                            Chess[endcolum, (beginrow + endrow) / 2].Getcolor() == "red")
+                                        {
+                                            cango = true;
+
+                                        }
+                                        else
+                                        { cango = false; }
+                                    }
+                                    if (Math.Abs(endrow - beginrow) == 1 && Math.Abs(endcolum - begincolum) == 2)
+                                    {
+                                        if (Chess[begincolum - endcolum / 2, endrow].Getname() == "nochess" ||
+
+                                            Chess[begincolum - endcolum / 2, endrow].Getcolor() == "red")
+                                        {
+                                            cango = true;
+
+                                        }
+                                        else
+                                        { cango = false; }
+                                    }
+                                }
+                                else
+                                { cango = false; }
 
                             }
-                            else if (Math.Abs(begincolum - endcolum) == 1 && Math.Abs(beginrow - endrow) == 2)
-                            {
-                                if (Chess[begincolum, (beginrow + endrow) / 2].Getname() == "nochess")
-                                { cango = true; }
-                                else { cango = false; }
-                            }
-                            else cango = false;
                             break;
-
 
                     }
                     break;
@@ -862,113 +897,6 @@ namespace ConsoleXiangqi
 
                     break;
                 //--------------------------------------------------------------------------
-                case "将":
-                    switch (Chess[begincolum, beginrow].color)
-                    {
-                        case "red":
-                            if ((endrow >= 7 && endrow <= 9) && (endcolum >= 3 && endcolum <= 5))
-                            {
-                                if (Math.Pow(endrow - beginrow, 2) + Math.Pow(endcolum - begincolum, 2) == 1)
-                                {
-                                    if (Chess[endcolum, endrow].Getname().Equals("nochess"))
-                                    {
-                                        cango = true;
-                                    }
-                                    else if (!Chess[endcolum, endrow].Getname().Equals("nochess") && (!Chess[endcolum, endrow].Getcolor().Equals(Chess[endcolum, endrow].Getcolor())))
-                                    {
-                                        cango = true;
-                                    }
-                                    else
-                                        cango = false;
-                                }
-                                else
-                                    cango = false;
-
-                            }
-                            else
-                                cango = false;
-                            break;
-
-                        case "black":
-                            if ((endrow >= 0 && endrow <= 2) && (endcolum >= 3 && endcolum <= 5))
-                            {
-                                if (Math.Pow(endrow - beginrow, 2) + Math.Pow(endcolum - begincolum, 2) == 1)
-                                {
-                                    if (Chess[endcolum, endrow].Getname().Equals("nochess"))
-                                    {
-                                        cango = true;
-                                    }
-                                    else if (!Chess[endcolum, endrow].Getname().Equals("nochess") && (!Chess[endcolum, endrow].Getcolor().Equals(Chess[endcolum, endrow].Getcolor())))
-                                    {
-                                        cango = true;
-                                    }
-                                    else
-                                        cango = false;
-                                }
-                                else
-                                    cango = false;
-
-                            }
-                            else
-                                cango = false;
-                            break;
-                    }
-
-                    break;
-                //--------------------------------------------------------------------------
-                case "士":
-                    switch (Chess[begincolum, beginrow].color)
-                    {
-                        case "red":
-                            if ((endrow >= 7 && endrow <= 9) && (endcolum >= 3 && endcolum <= 5))
-                            {
-                                if (Math.Pow(endrow - beginrow, 2) + Math.Pow(endcolum - begincolum, 2) == 1)
-                                {
-                                    if (Chess[endcolum, endrow].Getname().Equals("nochess"))
-                                    {
-                                        cango = true;
-                                    }
-                                    else if (!Chess[endcolum, endrow].Getname().Equals("nochess") && (!Chess[endcolum, endrow].Getcolor().Equals(Chess[endcolum, endrow].Getcolor())))
-                                    {
-                                        cango = true;
-                                    }
-                                    else
-                                        cango = false;
-                                }
-                                else
-                                    cango = false;
-
-                            }
-                            else
-                                cango = false;
-                            break;
-
-                        case "black":
-                            if ((endrow >= 0 && endrow <= 2) && (endcolum >= 3 && endcolum <= 5))
-                            {
-                                if (Math.Pow(endrow - beginrow, 2) + Math.Pow(endcolum - begincolum, 2) == 2)
-                                {
-                                    if (Chess[endcolum, endrow].Getname().Equals("nochess"))
-                                    {
-                                        cango = true;
-                                    }
-                                    else if (!Chess[endcolum, endrow].Getname().Equals("nochess") && (!Chess[endcolum, endrow].Getcolor().Equals(Chess[endcolum, endrow].Getcolor())))
-                                    {
-                                        cango = true;
-                                    }
-                                    else
-                                        cango = false;
-                                }
-                                else
-                                    cango = false;
-
-                            }
-                            else
-                                cango = false;
-                            break;
-                    }
-                    break;
-
                 case "车":
                     {
                         if (begincolum - endcolum == 0 && endrow - beginrow > 0)
@@ -1049,6 +977,151 @@ namespace ConsoleXiangqi
 
                     }
 
+                    break;
+                //--------------------------------------------------------------------------
+                case "将":
+                    switch (Chess[begincolum, beginrow].color)
+                    {
+                        case "red":
+                            if ((endrow >= 7 && endrow <= 9) && (endcolum >= 3 && endcolum <= 5))
+                            {
+                                if (Math.Pow(endrow - beginrow, 2) + Math.Pow(endcolum - begincolum, 2) == 1)
+                                {
+                                    if (Chess[endcolum, endrow].Getname().Equals("nochess"))
+                                    {
+                                        cango = true;
+                                    }
+                                    else if (!Chess[endcolum, endrow].Getname().Equals("nochess") && (!Chess[endcolum, endrow].Getcolor().Equals(Chess[endcolum, endrow].Getcolor())))
+                                    {
+                                        cango = true;
+                                    }
+                                    else
+                                        cango = false;
+                                }
+                                else
+                                    cango = false;
+
+                            }
+                            //飞将
+                            else if (endcolum == blackgeneral.colum && endrow == blackgeneral.row)
+                            {
+                                int middlePiece = 0;
+                                for (int i = beginrow - 1; i > endrow; i--)
+                                {
+                                    if (Chess[begincolum, i].Getname() != "nochess")
+                                    {
+                                        middlePiece = middlePiece + 1;
+                                    }
+
+                                }
+                                if (middlePiece == 0)
+                                {
+                                    cango = true;
+                                }
+                                else
+                                    cango = false;
+                            }
+                            else
+                                cango = false;
+                            break;
+
+                        case "black":
+                            if ((endrow >= 0 && endrow <= 2) && (endcolum >= 3 && endcolum <= 5))
+                            {
+                                if (Math.Pow(endrow - beginrow, 2) + Math.Pow(endcolum - begincolum, 2) == 1)
+                                {
+                                    if (Chess[endcolum, endrow].Getname().Equals("nochess"))
+                                    {
+                                        cango = true;
+                                    }
+                                    else if (!Chess[endcolum, endrow].Getname().Equals("nochess") && (!Chess[endcolum, endrow].Getcolor().Equals(Chess[endcolum, endrow].Getcolor())))
+                                    {
+                                        cango = true;
+                                    }
+                                    else
+                                        cango = false;
+                                }
+                                else
+                                    cango = false;
+
+                            }
+                            //飞将
+                            else if (endcolum == redgeneral.colum && endrow == redgeneral.row)
+                            {
+                                int middlePiece = 0;
+                                for (int i = beginrow + 1; i < endrow; i++)
+                                {
+                                    if (Chess[begincolum, i].Getname() != "nochess")
+                                    {
+                                        middlePiece = middlePiece + 1;
+                                    }
+
+                                }
+                                if (middlePiece == 0)
+                                {
+                                    cango = true;
+                                }
+                                else
+                                    cango = false;
+                            }
+                            else
+                                cango = false;
+                            break;
+                    }
+
+                    break;
+                //--------------------------------------------------------------------------
+                case "士":
+                    switch (Chess[begincolum, beginrow].color)
+                    {
+                        case "red":
+                            if ((endrow >= 7 && endrow <= 9) && (endcolum >= 3 && endcolum <= 5))
+                            {
+                                if (Math.Pow(endrow - beginrow, 2) + Math.Pow(endcolum - begincolum, 2) == 2)
+                                {
+                                    if (Chess[endcolum, endrow].Getname().Equals("nochess"))
+                                    {
+                                        cango = true;
+                                    }
+                                    else if (!Chess[endcolum, endrow].Getname().Equals("nochess") && (!Chess[endcolum, endrow].Getcolor().Equals(Chess[endcolum, endrow].Getcolor())))
+                                    {
+                                        cango = true;
+                                    }
+                                    else
+                                        cango = false;
+                                }
+                                else
+                                    cango = false;
+
+                            }
+                            else
+                                cango = false;
+                            break;
+
+                        case "black":
+                            if ((endrow >= 0 && endrow <= 2) && (endcolum >= 3 && endcolum <= 5))
+                            {
+                                if (Math.Pow(endrow - beginrow, 2) + Math.Pow(endcolum - begincolum, 2) == 2)
+                                {
+                                    if (Chess[endcolum, endrow].Getname().Equals("nochess"))
+                                    {
+                                        cango = true;
+                                    }
+                                    else if (!Chess[endcolum, endrow].Getname().Equals("nochess") && (!Chess[endcolum, endrow].Getcolor().Equals(Chess[endcolum, endrow].Getcolor())))
+                                    {
+                                        cango = true;
+                                    }
+                                    else
+                                        cango = false;
+                                }
+                                else
+                                    cango = false;
+
+                            }
+                            else
+                                cango = false;
+                            break;
+                    }
                     break;
             }
             return cango;
@@ -1607,7 +1680,930 @@ namespace ConsoleXiangqi
 
                     }
                     break;
-                    //-------------------------------------------------------------------------------------------------------------------------------------------
+                //-------------------------------------------------------------------------------------------------------------------------------------------
+                case "将":
+                    switch (Chess[colum, row].Getcolor())
+                    {
+                        case "red":
+                            if (row - 1 >= 7)
+                            {
+                                if (Chess[colum, row - 1].Getname() == "nochess" || Chess[colum, row - 1].Getcolor() != Chess[colum, row].Getcolor())
+                                {
+                                    Chess[colum, row - 1].changeCango();
+                                }
+                            }
+                            if (row + 1 <= 9)
+                            {
+                                if (Chess[colum, row + 1].Getname() == "nochess" || Chess[colum, row + 1].Getcolor() != Chess[colum, row].Getcolor())
+                                {
+                                    Chess[colum, row + 1].changeCango();
+                                }
+                            }
+                            if (colum - 1 >= 3)
+                            {
+                                if (Chess[colum - 1, row].Getname() == "nochess" || Chess[colum - 1, row].Getcolor() != Chess[colum, row].Getcolor())
+                                {
+                                    Chess[colum - 1, row].changeCango();
+                                }
+                            }
+                            if (colum + 1 <= 5)
+                            {
+                                if (Chess[colum + 1, row].Getname() == "nochess" || Chess[colum + 1, row].Getcolor() != Chess[colum, row].Getcolor())
+                                {
+                                    Chess[colum + 1, row].changeCango();
+                                }
+                            }
+                            //飞将
+                            if (colum == blackgeneral.colum)
+                            {
+                                int middlePiece = 0;
+                                for (int i = row - 1; i > blackgeneral.row; i--)
+                                {
+                                    if (Chess[colum, i].Getname() != "nochess")
+                                    {
+                                        middlePiece = middlePiece + 1;
+                                    }
+
+                                }
+                                if (middlePiece == 0)
+                                {
+                                    Chess[blackgeneral.colum, blackgeneral.row].changeCango();
+                                }
+                            }
+                            break;
+
+                        case "black":
+                            if (row - 1 >= 0)
+                            {
+                                if (Chess[colum, row - 1].Getname() == "nochess" || Chess[colum, row - 1].Getcolor() != Chess[colum, row].Getcolor())
+                                {
+                                    Chess[colum, row - 1].changeCango();
+                                }
+                            }
+                            if (row + 1 <= 2)
+                            {
+                                if (Chess[colum, row + 1].Getname() == "nochess" || Chess[colum, row + 1].Getcolor() != Chess[colum, row].Getcolor())
+                                {
+                                    Chess[colum, row + 1].changeCango();
+                                }
+                            }
+                            if (colum - 1 >= 3)
+                            {
+                                if (Chess[colum - 1, row].Getname() == "nochess" || Chess[colum - 1, row].Getcolor() != Chess[colum, row].Getcolor())
+                                {
+                                    Chess[colum - 1, row].changeCango();
+                                }
+                            }
+                            if (colum + 1 <= 5)
+                            {
+                                if (Chess[colum + 1, row].Getname() == "nochess" || Chess[colum + 1, row].Getcolor() != Chess[colum, row].Getcolor())
+                                {
+                                    Chess[colum + 1, row].changeCango();
+                                }
+                            }
+                            //飞将
+                            if (colum == redgeneral.colum)
+                            {
+                                int middlePiece = 0;
+                                for (int i = row + 1; i < redgeneral.row; i++)
+                                {
+                                    if (Chess[colum, i].Getname() != "nochess")
+                                    {
+                                        middlePiece = middlePiece + 1;
+                                    }
+
+                                }
+                                if (middlePiece == 0)
+                                {
+                                    Chess[redgeneral.colum, redgeneral.row].changeCango();
+                                }
+                            }
+                            break;
+                    }
+                    break;
+                //----------------------------------------------------------------------------------------------------------------------------------------------
+                case "士":
+                    switch (Chess[colum, row].Getcolor())
+                    {
+                        case "red":
+                            if (row - 1 >= 7 && colum + 1 <= 5)
+                            {
+                                if (Chess[colum + 1, row - 1].Getname().Equals("nochess"))
+                                {
+                                    Chess[colum + 1, row - 1].changeCango();
+                                }
+                                else if (!(Chess[colum + 1, row - 1].Getname().Equals("nochess") || Chess[colum + 1, row - 1].Getcolor().Equals(Chess[colum, row].Getcolor())))
+                                {
+                                    Chess[colum + 1, row - 1].changeCango();
+                                }
+                            }
+
+                            if (row - 1 >= 7 && colum - 1 >= 3)
+                            {
+                                if (Chess[colum - 1, row - 1].Getname().Equals("nochess"))
+                                {
+                                    Chess[colum - 1, row - 1].changeCango();
+                                }
+                                else if (!(Chess[colum - 1, row - 1].Getname().Equals("nochess") || Chess[colum - 1, row - 1].Getcolor().Equals(Chess[colum, row].Getcolor())))
+                                {
+                                    Chess[colum - 1, row - 1].changeCango();
+                                }
+                            }
+
+                            if (row + 1 <= 9 && colum - 1 >= 3)
+                            {
+                                if (Chess[colum - 1, row + 1].Getname().Equals("nochess"))
+                                {
+                                    Chess[colum - 1, row + 1].changeCango();
+                                }
+                                else if (!(Chess[colum - 1, row + 1].Getname().Equals("nochess") || Chess[colum - 1, row + 1].Getcolor().Equals(Chess[colum, row].Getcolor())))
+                                {
+                                    Chess[colum - 1, row + 1].changeCango();
+                                }
+                            }
+
+                            if (row + 1 <= 9 && colum + 1 <= 5)
+                            {
+                                if (Chess[colum + 1, row + 1].Getname().Equals("nochess"))
+                                {
+                                    Chess[colum + 1, row + 1].changeCango();
+                                }
+                                else if (!(Chess[colum + 1, row + 1].Getname().Equals("nochess") || Chess[colum + 1, row + 1].Getcolor().Equals(Chess[colum, row].Getcolor())))
+                                {
+                                    Chess[colum + 1, row + 1].changeCango();
+                                }
+                            }
+
+                            break;
+                        case "black":
+                            if (row - 1 >= 0 && colum + 1 <= 5)
+                            {
+                                if (Chess[colum + 1, row - 1].Getname().Equals("nochess"))
+                                {
+                                    Chess[colum + 1, row - 1].changeCango();
+                                }
+                                else if (!(Chess[colum + 1, row - 1].Getname().Equals("nochess") || Chess[colum + 1, row - 1].Getcolor().Equals(Chess[colum, row].Getcolor())))
+                                {
+                                    Chess[colum + 1, row - 1].changeCango();
+                                }
+                            }
+
+                            if (row - 1 >= 0 && colum - 1 >= 3)
+                            {
+                                if (Chess[colum - 1, row - 1].Getname().Equals("nochess"))
+                                {
+                                    Chess[colum - 1, row - 1].changeCango();
+                                }
+                                else if (!(Chess[colum - 1, row - 1].Getname().Equals("nochess") || Chess[colum - 1, row - 1].Getcolor().Equals(Chess[colum, row].Getcolor())))
+                                {
+                                    Chess[colum - 1, row - 1].changeCango();
+                                }
+                            }
+
+                            if (row + 1 <= 2 && colum - 1 >= 3)
+                            {
+                                if (Chess[colum - 1, row + 1].Getname().Equals("nochess"))
+                                {
+                                    Chess[colum - 1, row + 1].changeCango();
+                                }
+                                else if (!(Chess[colum - 1, row + 1].Getname().Equals("nochess") || Chess[colum - 1, row + 1].Getcolor().Equals(Chess[colum, row].Getcolor())))
+                                {
+                                    Chess[colum - 1, row + 1].changeCango();
+                                }
+                            }
+
+                            if (row + 1 <= 2 && colum + 1 <= 5)
+                            {
+                                if (Chess[colum + 1, row + 1].Getname().Equals("nochess"))
+                                {
+                                    Chess[colum + 1, row + 1].changeCango();
+                                }
+                                else if (!(Chess[colum + 1, row + 1].Getname().Equals("nochess") || Chess[colum + 1, row + 1].Getcolor().Equals(Chess[colum, row].Getcolor())))
+                                {
+                                    Chess[colum + 1, row + 1].changeCango();
+                                }
+                            }
+                            break;
+                    }
+                    break;
+                //----------------------------------------------------------------------------------------------------------------------------------------------
+                case "马":
+                    switch (Chess[colum, row].Getcolor())
+                    {
+                        case "red":
+
+
+                            if (colum >= 2 && colum <= 6 && row >= 2 && row <= 7)
+                            {
+                                //下
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum - 1, row + 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 1, row + 2].changeCango();
+
+                                }
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum + 1, row + 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 1, row + 2].changeCango();
+
+                                }
+                                //左
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row + 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 2, row + 1].changeCango();
+
+                                }
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row - 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 2, row - 1].changeCango();
+
+                                }
+                                //上
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum - 1, row - 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 1, row - 2].changeCango();
+
+                                }
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum + 1, row - 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 1, row - 2].changeCango();
+
+                                }
+                                //右
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row - 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row + 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 2, row + 1].changeCango();
+
+                                }
+
+                            }
+
+                            if (colum >= 2 && colum <= 6 && row == 1)
+                            {
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum - 1, row + 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 1, row + 2].changeCango();
+
+                                }
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum + 1, row + 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 1, row + 2].changeCango();
+
+                                }
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row + 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 2, row + 1].changeCango();
+
+                                }
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row - 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row - 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row + 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 2, row + 1].changeCango();
+
+                                }
+
+                            }
+                            if (colum >= 2 && colum <= 6 && row == 8)
+                            {
+                                //左
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row + 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 2, row + 1].changeCango();
+
+                                }
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row - 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 2, row - 1].changeCango();
+
+                                }
+                                //上
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum - 1, row - 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 1, row - 2].changeCango();
+
+                                }
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum + 1, row - 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 1, row - 2].changeCango();
+
+                                }
+                                //右
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row - 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row + 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 2, row + 1].changeCango();
+
+                                }
+
+
+                            }
+                            if (row >= 2 && row <= 7 && colum == 1)
+                            {
+                                //下
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum - 1, row + 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 1, row + 2].changeCango();
+
+                                }
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum + 1, row + 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 1, row + 2].changeCango();
+
+                                }
+
+                                //上
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum - 1, row - 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 1, row - 2].changeCango();
+
+                                }
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum + 1, row - 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 1, row - 2].changeCango();
+
+                                }
+                                //右
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row - 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row + 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 2, row + 1].changeCango();
+
+                                }
+
+                            }
+                            if (row >= 2 && row <= 7 && colum == 7)
+                            {
+                                //下
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum - 1, row + 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 1, row + 2].changeCango();
+
+                                }
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum + 1, row + 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 1, row + 2].changeCango();
+
+                                }
+                                //左
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row + 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 2, row + 1].changeCango();
+
+                                }
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row - 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 2, row - 1].changeCango();
+
+                                }
+                                //上
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum - 1, row - 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 1, row - 2].changeCango();
+
+                                }
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum + 1, row - 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 1, row - 2].changeCango();
+
+                                }
+
+                            }
+                            if (colum == 1 && row == 1)
+                            { //下
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum - 1, row + 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 1, row + 2].changeCango();
+
+                                }
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum + 1, row + 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 1, row + 2].changeCango();
+
+                                }
+                                //右
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row - 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row + 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 2, row + 1].changeCango();
+
+                                }
+                            }
+                            if (colum == 1 && row == 8)
+                            {
+                                //上
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum - 1, row - 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 1, row - 2].changeCango();
+
+                                }
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum + 1, row - 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 1, row - 2].changeCango();
+
+                                }
+                                //右
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row - 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row + 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 2, row + 1].changeCango();
+
+                                }
+                            }
+                            if (colum == 7 && row == 1)
+                            {
+                                //下
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum - 1, row + 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 1, row + 2].changeCango();
+
+                                }
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum + 1, row + 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 1, row + 2].changeCango();
+
+                                }
+                                //左
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row + 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 2, row + 1].changeCango();
+
+                                }
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row - 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 2, row - 1].changeCango();
+
+                                }
+
+                            }
+                            if (colum == 7 && row == 8)
+                            {
+                                //左
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row + 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 2, row + 1].changeCango();
+
+                                }
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row - 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 2, row - 1].changeCango();
+
+                                }
+                                //上
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum - 1, row - 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 1, row - 2].changeCango();
+
+                                }
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum + 1, row - 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 1, row - 2].changeCango();
+
+                                }
+
+                            }
+
+                            if (colum >= 2 && colum <= 6 && row == 0)
+                            {
+                                //下
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum - 1, row + 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 1, row + 2].changeCango();
+
+                                }
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum + 1, row + 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 1, row + 2].changeCango();
+
+                                }
+                                //左
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row + 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 2, row + 1].changeCango();
+
+                                }
+                                //右
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row + 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 2, row + 1].changeCango();
+
+                                }
+                            }
+                            if (colum >= 2 && colum <= 6 && row == 9)
+                            {
+                                //上
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum - 1, row - 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 1, row - 2].changeCango();
+
+                                }
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum + 1, row - 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 1, row - 2].changeCango();
+
+                                }
+
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row - 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row - 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 2, row - 1].changeCango();
+
+                                }
+
+                            }
+                            if (row >= 2 && row <= 7 && colum == 0)
+                            {
+                                //右
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row - 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row + 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 2, row + 1].changeCango();
+
+                                }
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum + 1, row + 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 1, row + 2].changeCango();
+
+                                }
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum + 1, row - 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 1, row - 2].changeCango();
+
+                                }
+
+
+                            }
+                            if (row >= 2 && row <= 7 && colum == 8)
+                            {
+                                //左
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row + 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 2, row + 1].changeCango();
+
+                                }
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row - 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum - 1, row - 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 1, row - 2].changeCango();
+
+                                }
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum - 1, row + 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 1, row + 2].changeCango();
+
+                                }
+
+                            }
+                            if (colum == 1 && row == 0)
+                            {  //下
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum - 1, row + 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 1, row + 2].changeCango();
+
+                                }
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum + 1, row + 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 1, row + 2].changeCango();
+
+                                }
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row + 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 2, row + 1].changeCango();
+
+                                }
+                            }
+                            if (colum == 7 && row == 0)
+                            {
+                                //下
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum - 1, row + 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 1, row + 2].changeCango();
+
+                                }
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum + 1, row + 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 1, row + 2].changeCango();
+
+                                }
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row + 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 2, row + 1].changeCango();
+
+                                }
+
+
+                            }
+                            if (colum == 0 && row == 8)
+                            { //右
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row - 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row + 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 2, row + 1].changeCango();
+
+                                }
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum + 1, row - 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 1, row - 2].changeCango();
+
+                                }
+
+                            }
+                            if (colum == 8 && row == 8)
+                            {
+                                //左
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row + 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 2, row + 1].changeCango();
+
+                                }
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row - 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum - 1, row - 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 1, row - 2].changeCango();
+
+                                }
+
+
+                            }
+                            if (colum == 0 && row == 0)
+                            {
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row + 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 2, row + 1].changeCango();
+
+                                }
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum + 1, row + 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 1, row + 2].changeCango();
+
+                                }
+
+
+                            }
+                            if (colum == 0 && row == 9)
+                            {
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row - 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum + 1, row - 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 1, row - 2].changeCango();
+
+                                }
+
+
+                            }
+                            if (colum == 8 && row == 0)
+                            {
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum - 1, row + 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 1, row + 2].changeCango();
+
+                                }
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row + 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 2, row + 1].changeCango();
+
+                                }
+
+                            }
+                            if (colum == 8 && row == 9)
+                            {
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum - 1, row - 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 1, row - 2].changeCango();
+
+                                }
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row - 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 2, row - 1].changeCango();
+
+                                }
+
+                            }
+                            if (colum == 1 && row == 9)
+                            {
+                                //上
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum - 1, row - 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 1, row - 2].changeCango();
+
+                                }
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum + 1, row - 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 1, row - 2].changeCango();
+
+                                }
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row - 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 2, row - 1].changeCango();
+
+                                }
+
+                            }
+                            if (colum == 7 && row == 9)
+                            {
+                                //上
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum - 1, row - 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 1, row - 2].changeCango();
+
+                                }
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum + 1, row - 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 1, row - 2].changeCango();
+
+                                }
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row - 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 2, row - 1].changeCango();
+                                }
+                            }
+                            if (colum == 0 && row == 1)
+                            {
+                                //右
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row - 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row + 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 2, row + 1].changeCango();
+
+                                }
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum + 1, row + 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum + 1, row + 2].changeCango();
+
+                                }
+                            }
+                            if (colum == 8 && row == 1)
+                            {
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row + 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 2, row + 1].changeCango();
+
+                                }
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row - 1].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum - 1, row + 2].Getcolor() != "red")
+                                {
+
+                                    Chess[colum - 1, row + 2].changeCango();
+
+                                }
+                            }
+
+                            break;
 
 
 
@@ -1616,12 +2612,724 @@ namespace ConsoleXiangqi
 
 
 
+                        case "black":
 
 
+                            if (colum >= 2 && colum <= 6 && row >= 2 && row <= 7)
+                            {
+                                //下
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum - 1, row + 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 1, row + 2].changeCango();
+
+                                }
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum + 1, row + 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 1, row + 2].changeCango();
+
+                                }
+                                //左
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row + 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 2, row + 1].changeCango();
+
+                                }
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row - 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 2, row - 1].changeCango();
+
+                                }
+                                //上
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum - 1, row - 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 1, row - 2].changeCango();
+
+                                }
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum + 1, row - 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 1, row - 2].changeCango();
+
+                                }
+                                //右
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row - 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row + 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 2, row + 1].changeCango();
+
+                                }
+
+                            }
+
+                            if (colum >= 2 && colum <= 6 && row == 1)
+                            {
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum - 1, row + 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 1, row + 2].changeCango();
+
+                                }
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum + 1, row + 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 1, row + 2].changeCango();
+
+                                }
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row + 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 2, row + 1].changeCango();
+
+                                }
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row - 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row - 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row + 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 2, row + 1].changeCango();
+
+                                }
+
+                            }
+                            if (colum >= 2 && colum <= 6 && row == 8)
+                            {
+                                //左
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row + 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 2, row + 1].changeCango();
+
+                                }
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row - 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 2, row - 1].changeCango();
+
+                                }
+                                //上
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum - 1, row - 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 1, row - 2].changeCango();
+
+                                }
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum + 1, row - 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 1, row - 2].changeCango();
+
+                                }
+                                //右
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row - 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row + 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 2, row + 1].changeCango();
+
+                                }
 
 
+                            }
+                            if (row >= 2 && row <= 7 && colum == 1)
+                            {
+                                //下
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum - 1, row + 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 1, row + 2].changeCango();
+
+                                }
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum + 1, row + 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 1, row + 2].changeCango();
+
+                                }
+
+                                //上
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum - 1, row - 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 1, row - 2].changeCango();
+
+                                }
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum + 1, row - 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 1, row - 2].changeCango();
+
+                                }
+                                //右
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row - 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row + 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 2, row + 1].changeCango();
+
+                                }
+
+                            }
+                            if (row >= 2 && row <= 7 && colum == 7)
+                            {
+                                //下
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum - 1, row + 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 1, row + 2].changeCango();
+
+                                }
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum + 1, row + 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 1, row + 2].changeCango();
+
+                                }
+                                //左
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row + 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 2, row + 1].changeCango();
+
+                                }
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row - 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 2, row - 1].changeCango();
+
+                                }
+                                //上
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum - 1, row - 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 1, row - 2].changeCango();
+
+                                }
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum + 1, row - 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 1, row - 2].changeCango();
+
+                                }
+
+                            }
+                            if (colum == 1 && row == 1)
+                            { //下
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum - 1, row + 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 1, row + 2].changeCango();
+
+                                }
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum + 1, row + 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 1, row + 2].changeCango();
+
+                                }
+                                //右
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row - 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row + 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 2, row + 1].changeCango();
+
+                                }
+                            }
+                            if (colum == 1 && row == 8)
+                            {
+                                //上
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum - 1, row - 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 1, row - 2].changeCango();
+
+                                }
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum + 1, row - 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 1, row - 2].changeCango();
+
+                                }
+                                //右
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row - 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row + 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 2, row + 1].changeCango();
+
+                                }
+                            }
+                            if (colum == 7 && row == 1)
+                            {
+                                //下
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum - 1, row + 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 1, row + 2].changeCango();
+
+                                }
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum + 1, row + 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 1, row + 2].changeCango();
+
+                                }
+                                //左
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row + 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 2, row + 1].changeCango();
+
+                                }
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row - 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 2, row - 1].changeCango();
+
+                                }
+
+                            }
+                            if (colum == 7 && row == 8)
+                            {
+                                //左
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row + 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 2, row + 1].changeCango();
+
+                                }
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row - 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 2, row - 1].changeCango();
+
+                                }
+                                //上
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum - 1, row - 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 1, row - 2].changeCango();
+
+                                }
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum + 1, row - 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 1, row - 2].changeCango();
+
+                                }
+
+                            }
+
+                            if (colum >= 2 && colum <= 6 && row == 0)
+                            {
+                                //下
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum - 1, row + 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 1, row + 2].changeCango();
+
+                                }
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum + 1, row + 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 1, row + 2].changeCango();
+
+                                }
+                                //左
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row + 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 2, row + 1].changeCango();
+
+                                }
+                                //右
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row + 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 2, row + 1].changeCango();
+
+                                }
+                            }
+                            if (colum >= 2 && colum <= 6 && row == 9)
+                            {
+                                //上
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum - 1, row - 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 1, row - 2].changeCango();
+
+                                }
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum + 1, row - 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 1, row - 2].changeCango();
+
+                                }
+
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row - 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row - 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 2, row - 1].changeCango();
+
+                                }
+
+                            }
+                            if (row >= 2 && colum <= 7 && colum == 0)
+                            {
+                                //右
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row - 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row + 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 2, row + 1].changeCango();
+
+                                }
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum + 1, row + 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 1, row + 2].changeCango();
+
+                                }
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum + 1, row - 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 1, row - 2].changeCango();
+
+                                }
 
 
+                            }
+                            if (row >= 2 && colum <= 7 && colum == 8)
+                            {
+                                //左
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row + 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 2, row + 1].changeCango();
+
+                                }
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row - 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum - 1, row - 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 1, row - 2].changeCango();
+
+                                }
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum - 1, row + 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 1, row + 2].changeCango();
+
+                                }
+
+                            }
+                            if (colum == 1 && row == 0)
+                            {  //下
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum - 1, row + 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 1, row + 2].changeCango();
+
+                                }
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum + 1, row + 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 1, row + 2].changeCango();
+
+                                }
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row + 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 2, row + 1].changeCango();
+
+                                }
+                            }
+                            if (colum == 7 && row == 0)
+                            {
+                                //下
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum - 1, row + 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 1, row + 2].changeCango();
+
+                                }
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum + 1, row + 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 1, row + 2].changeCango();
+
+                                }
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row + 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 2, row + 1].changeCango();
+
+                                }
+
+
+                            }
+                            if (colum == 0 && row == 8)
+                            { //右
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row - 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row + 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 2, row + 1].changeCango();
+
+                                }
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum + 1, row - 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 1, row - 2].changeCango();
+
+                                }
+
+                            }
+                            if (colum == 8 && row == 8)
+                            {
+                                //左
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row + 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 2, row + 1].changeCango();
+
+                                }
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row - 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum - 1, row - 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 1, row - 2].changeCango();
+
+                                }
+
+
+                            }
+                            if (colum == 0 && row == 0)
+                            {
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row + 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 2, row + 1].changeCango();
+
+                                }
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum + 1, row + 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 1, row + 2].changeCango();
+
+                                }
+
+
+                            }
+                            if (colum == 0 && row == 9)
+                            {
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row - 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum + 1, row - 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 1, row - 2].changeCango();
+
+                                }
+
+
+                            }
+                            if (colum == 8 && row == 0)
+                            {
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum - 1, row + 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 1, row + 2].changeCango();
+
+                                }
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row + 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 2, row + 1].changeCango();
+
+                                }
+
+                            }
+                            if (colum == 8 && row == 9)
+                            {
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum - 1, row - 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 1, row - 2].changeCango();
+
+                                }
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row - 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 2, row - 1].changeCango();
+
+                                }
+
+                            }
+                            if (colum == 1 && row == 9)
+                            {
+                                //上
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum - 1, row - 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 1, row - 2].changeCango();
+
+                                }
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum + 1, row - 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 1, row - 2].changeCango();
+
+                                }
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row - 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 2, row - 1].changeCango();
+
+                                }
+
+                            }
+                            if (colum == 7 && row == 9)
+                            {
+                                //上
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum - 1, row - 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 1, row - 2].changeCango();
+
+                                }
+                                if (Chess[colum, row - 1].Getname() == "nochess" && Chess[colum + 1, row - 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 1, row - 2].changeCango();
+
+                                }
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row - 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 2, row - 1].changeCango();
+                                }
+                            }
+                            if (colum == 0 && row == 1)
+                            {
+                                //右
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row - 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum + 1, row].Getname() == "nochess" && Chess[colum + 2, row + 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 2, row + 1].changeCango();
+
+                                }
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum + 1, row + 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum + 1, row + 2].changeCango();
+
+                                }
+                            }
+                            if (colum == 8 && row == 1)
+                            {
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row + 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 2, row + 1].changeCango();
+
+                                }
+                                if (Chess[colum - 1, row].Getname() == "nochess" && Chess[colum - 2, row - 1].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 2, row - 1].changeCango();
+
+                                }
+                                if (Chess[colum, row + 1].Getname() == "nochess" && Chess[colum - 1, row + 2].Getcolor() != "black")
+                                {
+
+                                    Chess[colum - 1, row + 2].changeCango();
+
+                                }
+                            }
+
+                            break;
+
+                    }
+                    break;
+                    //----------------------------------------------------------------------------------------------------------------------------------------------
             }
         }
     }
